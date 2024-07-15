@@ -7,11 +7,9 @@ public class WaveManager : MonoBehaviour
     public Transform[] spawnPoints;
     public int waveNumber = 0;
     private int enemiesToSpawn;
-    private ObjectPooler objectPooler;
 
     void Start()
     {
-        objectPooler = FindObjectOfType<ObjectPooler>();
         StartNextWave();
     }
 
@@ -36,13 +34,6 @@ public class WaveManager : MonoBehaviour
         int spawnIndex = Random.Range(0, spawnPoints.Length);
         int enemyIndex = Random.Range(0, enemyPrefabs.Length);
         GameObject enemy = Instantiate(enemyPrefabs[enemyIndex], spawnPoints[spawnIndex].position, Quaternion.identity);
-        // Alternativamente, usa el pool de objetos si ya está configurado
-        // GameObject enemy = objectPooler.GetPooledObject();
-        // if (enemy != null)
-        // {
-        //     enemy.transform.position = spawnPoints[spawnIndex].position;
-        //     enemy.transform.rotation = Quaternion.identity;
-        //     enemy.SetActive(true);
-        // }
     }
 }
+

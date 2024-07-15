@@ -57,9 +57,35 @@ public class TouchControls : MonoBehaviour
 
     void HandleShooting(Touch touch)
     {
-        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane));
-        Vector3 shootDirection = (touchPosition - firePoint.position).normalized;
-        Shoot(shootDirection);
+        Vector3 shootDirection = FindClosestEnemyDirection();
+        if (shootDirection != Vector3.zero)
+        {
+            Shoot(shootDirection);
+        }
+    }
+
+    Vector3 FindClosestEnemyDirection()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float shortestDistance = Mathf.Infinity;
+        GameObject closestEnemy = null;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(firePoint.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                closestEnemy = enemy;
+            }
+        }
+
+        if (closestEnemy != null)
+        {
+            return (closestEnemy.transform.position - firePoint.position).normalized;
+        }
+
+        return Vector3.zero;
     }
 
     void Shoot(Vector3 direction)
