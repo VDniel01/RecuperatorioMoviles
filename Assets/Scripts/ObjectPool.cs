@@ -4,35 +4,36 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    public GameObject objectPrefab;
-    public int poolSize = 20;
-    private List<GameObject> pool;
+    public static ObjectPooler Instance;
+    public List<GameObject> pooledObjects;
+    public GameObject objectToPool;
+    public int amountToPool;
 
     void Awake()
     {
-        pool = new List<GameObject>();
-        for (int i = 0; i < poolSize; i++)
+        Instance = this;
+    }
+
+    void Start()
+    {
+        pooledObjects = new List<GameObject>();
+        for (int i = 0; i < amountToPool; i++)
         {
-            GameObject obj = Instantiate(objectPrefab);
+            GameObject obj = Instantiate(objectToPool);
             obj.SetActive(false);
-            pool.Add(obj);
+            pooledObjects.Add(obj);
         }
     }
 
     public GameObject GetPooledObject()
     {
-        foreach (GameObject obj in pool)
+        for (int i = 0; i < pooledObjects.Count; i++)
         {
-            if (!obj.activeInHierarchy)
+            if (!pooledObjects[i].activeInHierarchy)
             {
-                obj.SetActive(true);
-                return obj;
+                return pooledObjects[i];
             }
         }
-
-        GameObject newObj = Instantiate(objectPrefab);
-        newObj.SetActive(false);
-        pool.Add(newObj);
-        return newObj;
+        return null;
     }
 }

@@ -93,5 +93,8 @@ public class TouchControls : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.velocity = direction * projectileSpeed;
+
+        // Añadir vibración al disparar
+        Vibration.Vibrate(50); // Vibrar por 50 milisegundos
     }
 }

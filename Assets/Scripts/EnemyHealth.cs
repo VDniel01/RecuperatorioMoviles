@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float health = 100f;
+    public float startingHealth = 100f;
+    private float currentHealth;
+
+    void Start()
+    {
+        currentHealth = startingHealth;
+    }
 
     public void TakeDamage(float amount)
     {
-        health -= amount;
-        if (health <= 0f)
+        currentHealth -= amount;
+        if (currentHealth <= 0f)
         {
             Die();
         }
+        Vibration.Vibrate(100); // Vibrar por 100 milisegundos cuando el enemigo recibe daño
     }
 
     void Die()
     {
-        // Aquí puedes añadir efectos de muerte, como animaciones
+        // Lógica para manejar la muerte del enemigo
         Destroy(gameObject);
     }
 }
