@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -15,6 +13,13 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void AddHealth(float amount)
+    {
+        health += amount;
+        // Asegúrate de no exceder la salud máxima si tienes una
+        // health = Mathf.Min(health, maxHealth);
     }
 
     void Die()

@@ -174,8 +174,8 @@ MonoBehaviour:
   player: {fileID: 0}
   followDistance: 20
   explosionRadius: 5
-  explosionForce: 700
-  damage: 50
+  explosionForce: 50
+  damage: 30
   explosionEffect: {fileID: 1752155309830754400, guid: c58ea67cf973e844db0b9dceb8ca446d, type: 3}
 --- !u!114 &8456430035310647640
 MonoBehaviour:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12fed01c1b5b8f4798c827743779b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  startingHealth: 60
 --- !u!1 &6570287846699185231
 GameObject:
   m_ObjectHideFlags: 0

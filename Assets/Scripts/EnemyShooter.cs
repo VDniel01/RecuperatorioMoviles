@@ -40,4 +40,25 @@ public class EnemyShooter : MonoBehaviour
         // Rotar el firePoint para que apunte hacia el jugador
         firePoint.LookAt(player);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Verificar si el objeto con el que colisiona tiene la etiqueta correcta
+        if (other.CompareTag("PlayerProjectile"))
+        {
+            // Suponiendo que las balas tienen el componente Bullet
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                // Aplicar daño si se encuentra el componente Bullet
+                EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(bullet.damage);
+                }
+            }
+            Destroy(other.gameObject); // Destruir el proyectil
+            Destroy(gameObject); // Destruir el enemigo
+        }
+    }
 }

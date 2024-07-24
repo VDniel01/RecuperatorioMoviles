@@ -24,7 +24,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        // Lógica para manejar la muerte del enemigo
         Destroy(gameObject);
     }
 }
